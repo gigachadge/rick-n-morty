@@ -19,7 +19,6 @@ type UserModalProp = {
   jobTitle?: string;
 };
 
-// TODO: fix modal not closing when interacting outside
 export function UserModal({ username, jobTitle }: UserModalProp) {
   const hasUserInfo = username && jobTitle;
 
@@ -31,7 +30,11 @@ export function UserModal({ username, jobTitle }: UserModalProp) {
   };
 
   return (
-    <Dialog.Root placement="center" open={isOpen}>
+    <Dialog.Root
+      placement="center"
+      open={isOpen}
+      onOpenChange={(e) => setIsOpen(e.open)}
+    >
       <Dialog.Trigger asChild>
         <Button variant="outline" onClick={() => setIsOpen(true)}>
           User information

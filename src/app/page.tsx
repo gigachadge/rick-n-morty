@@ -1,3 +1,4 @@
+import { CharacterInfoModalProvider } from "@/components/character-info-modal";
 import { CharactersList } from "@/components/characters-list";
 import { UserModal } from "@/components/user-modal";
 import { createApolloClient } from "@/lib/apollo-client";
@@ -59,7 +60,11 @@ export default async function Home({ searchParams }: HomeProps) {
         </Stack>
       );
     }
-    return <CharactersList characters={data.characters.results} />;
+    return (
+      <CharacterInfoModalProvider characters={data.characters.results}>
+        <CharactersList characters={data.characters.results} />
+      </CharacterInfoModalProvider>
+    );
   };
 
   return (
