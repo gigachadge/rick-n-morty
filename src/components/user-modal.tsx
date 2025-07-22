@@ -33,7 +33,12 @@ export function UserModal({ username, jobTitle }: UserModalProp) {
     <Dialog.Root
       placement="center"
       open={isOpen}
-      onOpenChange={(e) => setIsOpen(e.open)}
+      onOpenChange={(e) => {
+        if (!hasUserInfo) {
+          return;
+        }
+        setIsOpen(e.open);
+      }}
     >
       <Dialog.Trigger asChild>
         <Button variant="outline" onClick={() => setIsOpen(true)}>
