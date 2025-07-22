@@ -6,7 +6,7 @@ export type CharactersResponse = {
 };
 
 export type Info = {
-  pages: number;
+  count: number;
 };
 
 export type Character = {

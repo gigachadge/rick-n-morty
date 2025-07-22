@@ -1,5 +1,6 @@
 import { CharacterInfoModalProvider } from "@/components/character-info-modal";
 import { CharactersList } from "@/components/characters-list";
+import { CharactersPagination } from "@/components/characters-pagination";
 import { UserModal } from "@/components/user-modal";
 import { createApolloClient } from "@/lib/apollo-client";
 import { GET_CHARACTERS } from "@/queries";
@@ -62,17 +63,23 @@ export default async function Home({ searchParams }: HomeProps) {
     }
     return (
       <CharacterInfoModalProvider characters={data.characters.results}>
-        <CharactersList characters={data.characters.results} />
+        <Stack alignItems="center" gap="7">
+          <CharactersList characters={data.characters.results} />
+          <CharactersPagination
+            totalCount={data.characters.info.count}
+            pageSize={20}
+          />
+        </Stack>
       </CharacterInfoModalProvider>
     );
   };
 
   return (
     <Flex direction="column" minH="100vh" padding="5">
-      <Flex as="header" paddingBottom="5">
+      <Flex as="header" paddingBottom="5" justifyContent="flex-end">
         <UserModal username={username} jobTitle={jobTitle} />
       </Flex>
-      <Flex as="main" flex="1">
+      <Flex as="main" flex="1" justifyContent="center">
         {renderMainContent()}
       </Flex>
       <Flex as="footer" justifyContent="center" paddingTop="5">
